@@ -215,22 +215,22 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Weakness",
+        text: "Not being strong enough when it mattered",
         points: { adam: 2, lia: 1 },
       },
 
       b: {
-        text: "Abandoning someone",
+        text: "Failing someone who trusted me",
         points: { amelia: 2, paulo: 1 },
       },
 
       c: {
-        text: "Misjudging a situation",
+        text: "Trusting the wrong person",
         points: { alex: 2 },
       },
 
       d: {
-        text: "Hurting people unintentionally",
+        text: "Causing pain without meaning to",
         points: { annie: 2, paulo: 1 },
       },
     },
