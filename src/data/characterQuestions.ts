@@ -3,27 +3,27 @@ import { Question } from "@/types/question";
 
 export const characterQuestions: Question[] = [
   {
-    question: "What drives you the most?",
+    question: "Which feeling defines you the most deep inside?",
 
     options: {
       a: {
-        text: "Proving my strength and worth",
+        text: "Determination",
         points: { lia: 2, adam: 1 },
       },
 
       b: {
-        text: "Protecting the people I care about",
-        points: { amelia: 2, paulo: 1 },
+        text: "Attachment",
+        points: { amelia: 2 },
       },
 
       c: {
-        text: "Understanding the world and staying free",
-        points: { annie: 2 },
+        text: "Caution",
+        points: { alex: 2 },
       },
 
       d: {
-        text: "Surviving no matter what happens",
-        points: { alex: 2 },
+        text: "Compassion",
+        points: { paulo: 2, annie: 1 },
       },
     },
   },
@@ -81,27 +81,27 @@ export const characterQuestions: Question[] = [
   },
 
   {
-    question: "What kind of leader do you respect most?",
+    question: "What kind of burden do you carry most often?",
 
     options: {
       a: {
-        text: "Someone powerful and decisive",
-        points: { adam: 2 },
+        text: "Expectations",
+        points: { lia: 2, adam: 1 },
       },
 
       b: {
-        text: "Someone protective and compassionate",
-        points: { paulo: 2 },
+        text: "Emotional attachment",
+        points: { amelia: 2 },
       },
 
       c: {
-        text: "Someone independent and visionary",
-        points: { annie: 2 },
+        text: "Constant vigilance",
+        points: { alex: 2 },
       },
 
       d: {
-        text: "Someone intelligent and adaptable",
-        points: { alex: 2 },
+        text: "Responsibility for others",
+        points: { paulo: 2, annie: 1 },
       },
     },
   },
@@ -159,79 +159,79 @@ export const characterQuestions: Question[] = [
   },
 
   {
-    question: "What kind of environment feels most comfortable to you?",
+    question: "How do you usually protect yourself emotionally?",
 
     options: {
       a: {
-        text: "A place filled with ambition and competition",
+        text: "By staying disciplined",
         points: { lia: 2, adam: 1 },
       },
 
       b: {
-        text: "A quiet place surrounded by trusted people",
+        text: "By only trusting a few people",
         points: { amelia: 2 },
       },
 
       c: {
-        text: "A constantly changing and unpredictable place",
+        text: "By never fully depending on anyone",
         points: { alex: 2 },
       },
 
       d: {
-        text: "Open spaces connected to nature and freedom",
+        text: "By pretending everything is okay",
         points: { annie: 2, paulo: 1 },
       },
     },
   },
 
   {
-    question: "What motivates your decisions the most?",
+    question: "What would people misunderstand about you the most?",
 
     options: {
       a: {
-        text: "Responsibility and expectations",
-        points: { lia: 2 },
+        text: "My intensity",
+        points: { lia: 2, adam: 1 },
       },
 
       b: {
-        text: "Protecting emotional bonds",
-        points: { amelia: 2 },
+        text: "My emotional distance",
+        points: { amelia: 2, alex: 1 },
       },
 
       c: {
-        text: "Long-term survival",
+        text: "My adaptability",
         points: { alex: 2 },
       },
 
       d: {
-        text: "Hope for a better future",
-        points: { paulo: 2, annie: 1 },
+        text: "My optimism",
+        points: { annie: 2, paulo: 1 },
       },
     },
   },
 
   {
-    question: "How do you usually approach conflict?",
+    question: "What kind of mistake is hardest to forgive in yourself?",
 
     options: {
       a: {
-        text: "Face it directly",
+        text: "Weakness",
         points: { adam: 2, lia: 1 },
       },
 
       b: {
-        text: "Protect the people involved first",
-        points: { paulo: 2 },
+        text: "Abandoning someone",
+        points: { amelia: 2, paulo: 1 },
       },
 
       c: {
-        text: "Stay emotionally guarded and strategic",
+        text: "Misjudging a situation",
         points: { alex: 2 },
       },
 
       d: {
-        text: "Look for understanding before escalation",
-        points: { annie: 2, amelia: 1 },
+        text: "Hurting people unintentionally",
+        points: { annie: 2, paulo: 1 },
       },
     },
   },
@@ -263,27 +263,27 @@ export const characterQuestions: Question[] = [
   },
 
   {
-    question: "Which phrase resonates with you the most?",
+    question: "What kind of connection do you value most?",
 
     options: {
       a: {
-        text: "Strength creates order",
-        points: { adam: 2 },
+        text: "Mutual respect",
+        points: { adam: 2, lia: 1 },
       },
 
       b: {
-        text: "Trust must be protected",
+        text: "Emotional trust",
         points: { amelia: 2 },
       },
 
       c: {
-        text: "Adapt or disappear",
-        points: { alex: 2 },
+        text: "Intellectual understanding",
+        points: { alex: 2, annie: 1 },
       },
 
       d: {
-        text: "Freedom gives life meaning",
-        points: { annie: 2 },
+        text: "Peaceful companionship",
+        points: { paulo: 2 },
       },
     },
   },
