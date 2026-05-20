@@ -2,27 +2,24 @@
 
 import { useState } from "react";
 
-import QuestionCard from "@/components/QuestionCard";
-
 import { tribeQuestions } from "@/data/tribeQuestions";
 import { tribes } from "@/data/tribes";
 
-type Scores = {
-  [key: string]: number;
-};
-
 export default function TribeQuizPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [scores, setScores] = useState<Scores>({});
-  const [finished, setFinished] = useState(false);
-  const handleAnswer = (optionKey: "a" | "b" | "c" | "d") => {
-    const selectedOption = tribeQuestions[currentQuestion].options[optionKey];
 
+  const [scores, setScores] = useState<Record<string, number>>({});
+
+  const [finished, setFinished] = useState(false);
+
+  const question = tribeQuestions[currentQuestion];
+
+  function handleAnswer(points: Record<string, number>) {
     const updatedScores = { ...scores };
 
-    Object.entries(selectedOption.points).forEach(([tribeId, points]) => {
-      updatedScores[tribeId] = (updatedScores[tribeId] || 0) + points;
-    });
+    for (const tribe in points) {
+      updatedScores[tribe] = (updatedScores[tribe] || 0) + points[tribe];
+    }
 
     setScores(updatedScores);
 
@@ -33,53 +30,103 @@ export default function TribeQuizPage() {
     } else {
       setFinished(true);
     }
-  };
+  }
 
-  const getWinningTribe = () => {
-    let winner = "";
-    let highestScore = -1;
+  function getWinningTribe() {
+    return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0];
+  }
 
-    Object.entries(scores).forEach(([tribeId, score]) => {
-      if (score > highestScore) {
-        highestScore = score;
-        winner = tribeId;
-      }
-    });
-
-    return tribes.find((tribe) => tribe.id === winner);
-  };
-
-  const winningTribe = getWinningTribe();
+  const winningTribe = tribes.find((tribe) => tribe.id === getWinningTribe());
 
   return (
-    <main className="min-h-screen bg-black text-white flex items-center justify-center p-6">
-      {!finished ? (
-        <QuestionCard
-          question={tribeQuestions[currentQuestion].question}
-          options={tribeQuestions[currentQuestion].options}
-          onAnswer={handleAnswer}
-        />
-      ) : (
-        <div className="max-w-3xl w-full bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl">
-          <img
-            src={winningTribe?.image}
-            alt={winningTribe?.name}
-            className="w-full h-[400px] object-cover"
-          />
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-10">
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/images/backgrounds/tribes-bg.jpeg')",
+        }}
+      />
 
-          <div className="p-8 text-center">
-            <p className="text-zinc-500 uppercase tracking-[0.3em] mb-3">
-              Your Tribe Is
-            </p>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/70" />
 
-            <h1 className="text-6xl font-bold mb-6">{winningTribe?.name}</h1>
+      {/* Glow */}
+      <div className="absolute h-[500px] w-[500px] rounded-full bg-green-500/10 blur-3xl" />
 
-            <p className="text-zinc-300 text-lg leading-relaxed">
+      {/* Quiz Card */}
+      <div className="relative z-10 w-full max-w-3xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+        {!finished ? (
+          <>
+            {/* Progress */}
+            <div className="mb-8">
+              <div className="mb-2 flex justify-between text-sm text-gray-400">
+                <span>Question {currentQuestion + 1}</span>
+
+                <span>{tribeQuestions.length}</span>
+              </div>
+
+              <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full bg-green-400 transition-all duration-500"
+                  style={{
+                    width: `${
+                      ((currentQuestion + 1) / tribeQuestions.length) * 100
+                    }%`,
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Question */}
+            <h1 className="mb-10 text-3xl font-bold text-white">
+              {question.question}
+            </h1>
+
+            {/* Options */}
+            <div className="grid gap-5">
+              {Object.entries(question.options).map(([key, option]) => (
+                <button
+                  key={key}
+                  onClick={() => handleAnswer(option.points)}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-5 text-left text-lg transition duration-300 hover:scale-[1.02] hover:bg-white/10"
+                >
+                  <span className="mr-3 font-bold uppercase text-green-300">
+                    {key}
+                  </span>
+
+                  {option.text}
+                </button>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="text-center">
+            <p className="mb-4 text-gray-400">Your tribe is</p>
+
+            <h1 className="mb-6 text-6xl font-black tracking-[0.2em]">
+              {winningTribe?.name}
+            </h1>
+
+            <img
+              src={winningTribe?.image}
+              alt={winningTribe?.name}
+              className="mx-auto mb-8 h-72 w-full max-w-md rounded-3xl object-cover"
+            />
+
+            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-300">
               {winningTribe?.description}
             </p>
+
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-10 rounded-2xl bg-green-500/20 px-8 py-4 font-semibold transition hover:bg-green-500/30"
+            >
+              Restart Quiz
+            </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </main>
   );
 }
