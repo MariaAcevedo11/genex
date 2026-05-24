@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { tribeQuestions } from "@/data/tribeQuestions";
 import { tribes } from "@/data/tribes";
+import Link from "next/link";
 
 export default function TribeQuizPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -11,6 +12,12 @@ export default function TribeQuizPage() {
   const [scores, setScores] = useState<Record<string, number>>({});
 
   const [finished, setFinished] = useState(false);
+  const [history, setHistory] = useState<
+    {
+      scores: Record<string, number>;
+      answer: Record<string, number>;
+    }[]
+  >([]);
 
   const question = tribeQuestions[currentQuestion];
 
@@ -21,6 +28,14 @@ export default function TribeQuizPage() {
       updatedScores[tribe] = (updatedScores[tribe] || 0) + points[tribe];
     }
 
+    setHistory([
+      ...history,
+      {
+        scores: { ...scores },
+        answer: points,
+      },
+    ]);
+
     setScores(updatedScores);
 
     const nextQuestion = currentQuestion + 1;
@@ -30,6 +45,20 @@ export default function TribeQuizPage() {
     } else {
       setFinished(true);
     }
+  }
+
+  function handleBack() {
+    if (currentQuestion === 0) return;
+
+    const previousState = history[history.length - 1];
+
+    if (!previousState) return;
+
+    setScores(previousState.scores);
+
+    setHistory(history.slice(0, -1));
+
+    setCurrentQuestion(currentQuestion - 1);
   }
 
   function getWinningTribe() {
@@ -44,7 +73,7 @@ export default function TribeQuizPage() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/backgrounds/tribes-bg.jpeg')",
+          backgroundImage: "url('/images/backgrounds/tribes-bg.png')",
         }}
       />
 
@@ -53,6 +82,13 @@ export default function TribeQuizPage() {
 
       {/* Glow */}
       <div className="absolute h-[500px] w-[500px] rounded-full bg-green-500/10 blur-3xl" />
+
+      <Link
+        href="/"
+        className="absolute left-6 top-6 z-20 rounded-2xl border border-white/10 bg-black/30 px-5 py-3 text-sm font-semibold text-white backdrop-blur-md transition hover:border-cyan-400/40 hover:bg-cyan-400/10"
+      >
+        ← Back Home
+      </Link>
 
       {/* Quiz Card */}
       <div className="relative z-10 w-full max-w-3xl rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
@@ -83,6 +119,16 @@ export default function TribeQuizPage() {
               {question.question}
             </h1>
 
+            <div className="mb-6 flex justify-between">
+              <button
+                onClick={handleBack}
+                disabled={currentQuestion === 0}
+                className="rounded-xl border border-white/10 bg-white/5 px-5 py-2 text-sm text-gray-300 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                ← Back
+              </button>
+            </div>
+
             {/* Options */}
             <div className="grid gap-5">
               {Object.entries(question.options).map(([key, option]) => (
@@ -111,7 +157,7 @@ export default function TribeQuizPage() {
             <img
               src={winningTribe?.image}
               alt={winningTribe?.name}
-              className="mx-auto mb-8 h-72 w-full max-w-md rounded-3xl object-cover"
+              className="mx-auto mb-8 max-h-[500px] w-auto rounded-3xl object-contain"
             />
 
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-300">

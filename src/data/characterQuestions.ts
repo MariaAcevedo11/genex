@@ -7,23 +7,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Determination",
-        points: { lia: 2, adam: 1 },
+        text: "Compassion",
+        points: { paulo: 2, annie: 1 },
       },
 
       b: {
-        text: "Attachment",
-        points: { amelia: 2 },
-      },
-
-      c: {
         text: "Caution",
         points: { alex: 2 },
       },
 
+      c: {
+        text: "Determination",
+        points: { lia: 2, adam: 3 },
+      },
+
       d: {
-        text: "Compassion",
-        points: { paulo: 2, annie: 1 },
+        text: "Attachment",
+        points: { amelia: 2 },
       },
     },
   },
@@ -33,13 +33,13 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Focused and intense",
-        points: { lia: 2 },
+        text: "Energetic and optimistic",
+        points: { annie: 2 },
       },
 
       b: {
-        text: "Calm and trustworthy",
-        points: { paulo: 2 },
+        text: "Focused and intense",
+        points: { lia: 2 },
       },
 
       c: {
@@ -48,8 +48,8 @@ export const characterQuestions: Question[] = [
       },
 
       d: {
-        text: "Energetic and optimistic",
-        points: { annie: 2 },
+        text: "Calm and trustworthy",
+        points: { paulo: 2 },
       },
     },
   },
@@ -59,13 +59,13 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Failing the expectations placed on me",
-        points: { lia: 2, adam: 1 },
+        text: "Depending emotionally on the wrong person",
+        points: { alex: 2 },
       },
 
       b: {
-        text: "Being betrayed by someone close",
-        points: { amelia: 2 },
+        text: "Failing the expectations placed on me",
+        points: { lia: 2, adam: 2 },
       },
 
       c: {
@@ -74,8 +74,8 @@ export const characterQuestions: Question[] = [
       },
 
       d: {
-        text: "Depending emotionally on the wrong person",
-        points: { alex: 2 },
+        text: "Being betrayed by someone close",
+        points: { amelia: 2 },
       },
     },
   },
@@ -85,8 +85,8 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Expectations",
-        points: { lia: 2, adam: 1 },
+        text: "Responsibility for others",
+        points: { paulo: 2, annie: 1 },
       },
 
       b: {
@@ -95,13 +95,13 @@ export const characterQuestions: Question[] = [
       },
 
       c: {
-        text: "Constant vigilance",
-        points: { alex: 2 },
+        text: "Expectations",
+        points: { lia: 2, adam: 1 },
       },
 
       d: {
-        text: "Responsibility for others",
-        points: { paulo: 2, annie: 1 },
+        text: "Constant vigilance",
+        points: { alex: 2 },
       },
     },
   },
@@ -111,23 +111,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "My discipline",
-        points: { lia: 2, adam: 1 },
+        text: "My optimism and perspective",
+        points: { annie: 2 },
       },
 
       b: {
-        text: "My loyalty to others",
-        points: { amelia: 2, paulo: 1 },
-      },
-
-      c: {
         text: "My ability to adapt",
         points: { alex: 2 },
       },
 
+      c: {
+        text: "My discipline",
+        points: { lia: 2, adam: 1 },
+      },
+
       d: {
-        text: "My optimism and perspective",
-        points: { annie: 2 },
+        text: "My loyalty to others",
+        points: { amelia: 2, paulo: 1 },
       },
     },
   },
@@ -137,23 +137,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "I push myself even harder",
-        points: { lia: 2 },
-      },
-
-      b: {
-        text: "I stay calm for the people around me",
-        points: { paulo: 2 },
-      },
-
-      c: {
         text: "I analyze every possible outcome",
         points: { alex: 2 },
       },
 
-      d: {
+      b: {
         text: "I trust my instincts and stay flexible",
         points: { annie: 1, amelia: 1 },
+      },
+
+      c: {
+        text: "I stay calm for the people around me",
+        points: { paulo: 2 },
+      },
+
+      d: {
+        text: "I push myself even harder",
+        points: { lia: 2 },
       },
     },
   },
@@ -163,23 +163,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "By staying disciplined",
-        points: { lia: 2, adam: 1 },
-      },
-
-      b: {
-        text: "By only trusting a few people",
-        points: { amelia: 2 },
-      },
-
-      c: {
         text: "By never fully depending on anyone",
         points: { alex: 2 },
       },
 
-      d: {
+      b: {
         text: "By pretending everything is okay",
         points: { annie: 2, paulo: 1 },
+      },
+
+      c: {
+        text: "By staying disciplined",
+        points: { lia: 2, adam: 2 },
+      },
+
+      d: {
+        text: "By only trusting a few people",
+        points: { amelia: 2 },
       },
     },
   },
@@ -189,23 +189,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "My intensity",
-        points: { lia: 2, adam: 1 },
+        text: "My optimism",
+        points: { annie: 2, paulo: 1 },
       },
 
       b: {
-        text: "My emotional distance",
-        points: { amelia: 2, alex: 1 },
-      },
-
-      c: {
         text: "My adaptability",
         points: { alex: 2 },
       },
 
+      c: {
+        text: "My emotional distance",
+        points: { amelia: 2, alex: 1 },
+      },
+
       d: {
-        text: "My optimism",
-        points: { annie: 2, paulo: 1 },
+        text: "My intensity",
+        points: { lia: 2, adam: 3 },
       },
     },
   },
@@ -215,23 +215,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Not being strong enough when it mattered",
-        points: { adam: 2, lia: 1 },
-      },
-
-      b: {
-        text: "Failing someone who trusted me",
-        points: { amelia: 2, paulo: 1 },
-      },
-
-      c: {
         text: "Trusting the wrong person",
         points: { alex: 2 },
       },
 
-      d: {
+      b: {
         text: "Causing pain without meaning to",
         points: { annie: 2, paulo: 1 },
+      },
+
+      c: {
+        text: "Not being strong enough when it mattered",
+        points: { adam: 3, lia: 1 },
+      },
+
+      d: {
+        text: "Failing someone who trusted me",
+        points: { amelia: 2, paulo: 1 },
       },
     },
   },
@@ -241,23 +241,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Weak or irrelevant",
-        points: { adam: 2, lia: 1 },
+        text: "Someone who loses their humanity",
+        points: { paulo: 2 },
       },
 
       b: {
-        text: "Completely alone",
-        points: { amelia: 2 },
-      },
-
-      c: {
         text: "Emotionally dependent",
         points: { alex: 2 },
       },
 
+      c: {
+        text: "Weak or irrelevant",
+        points: { adam: 2, lia: 1 },
+      },
+
       d: {
-        text: "Someone who loses their humanity",
-        points: { paulo: 2 },
+        text: "Completely alone",
+        points: { amelia: 2 },
       },
     },
   },
@@ -267,23 +267,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Mutual respect",
-        points: { adam: 2, lia: 1 },
+        text: "Peaceful companionship",
+        points: { paulo: 2 },
       },
 
       b: {
+        text: "Mutual respect",
+        points: { adam: 3, lia: 1 },
+      },
+
+      c: {
         text: "Emotional trust",
         points: { amelia: 2 },
       },
 
-      c: {
+      d: {
         text: "Intellectual understanding",
         points: { alex: 2, annie: 1 },
-      },
-
-      d: {
-        text: "Peaceful companionship",
-        points: { paulo: 2 },
       },
     },
   },
@@ -293,23 +293,23 @@ export const characterQuestions: Question[] = [
 
     options: {
       a: {
-        text: "Knowing I fulfilled my duty",
-        points: { lia: 2 },
+        text: "Feeling free and emotionally alive",
+        points: { annie: 2 },
       },
 
       b: {
-        text: "Being surrounded by people I love",
-        points: { paulo: 2, amelia: 1 },
-      },
-
-      c: {
         text: "Knowing I can survive on my own",
         points: { alex: 2 },
       },
 
+      c: {
+        text: "Being surrounded by people I love",
+        points: { paulo: 2, amelia: 1 },
+      },
+
       d: {
-        text: "Feeling free and emotionally alive",
-        points: { annie: 2 },
+        text: "Knowing I fulfilled my duty",
+        points: { lia: 2 },
       },
     },
   },

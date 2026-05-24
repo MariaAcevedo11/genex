@@ -6,7 +6,7 @@ export const characters: Character[] = [
     id: "lia",
     name: "Lia",
     description:
-      "Disciplined and determined, Lia struggles between loyalty to Leo and the growing doubt inside her.",
+      "Disciplined and determined, Lia struggles between loyalty to her own people and the growing doubt inside her.",
     image: "/images/characters/lia.png",
   },
 
