@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { RadiationOrbs } from "@/components/RadiationOrbs";
 import { RuneCorners } from "@/components/RuneCorners";
+import { HomeAudio } from "@/components/HomeAudio";
 
 const DIVIDER = (
   <div className="flex items-center gap-3 my-1">
@@ -63,6 +64,7 @@ export default function Home() {
             "radial-gradient(ellipse at 50% 0%, rgba(14,80,65,0.08) 0%, transparent 60%)",
         }}
       />
+      <HomeAudio/>
 
       {/* Ambient radiation orbs */}
       <RadiationOrbs />

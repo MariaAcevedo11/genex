@@ -11,6 +11,8 @@ import {
   DynamicCorners,
   DynamicDivider,
 } from "@/components/DynamicQuiz";
+import { useBackgroundAudio } from "@/hooks/useBackgroundAudio";
+import { MuteButton } from "@/components/MuteButton";
 
 // ─── Static divider & corners — golden tone, quiz phase only ─────────────────
 
@@ -131,6 +133,13 @@ export default function TribeQuizPage() {
   const theme = winnerId
     ? (TRIBE_THEMES[winnerId] ?? FALLBACK_THEME)
     : FALLBACK_THEME;
+
+  // ── Background audio ─────────────────────────────────────────────────────
+  const { muted, toggleMute, ensurePlay } = useBackgroundAudio({
+    quizSrc: "/audio/tribes-quiz.mp3",
+    resultSrc: "/audio/result.mp3",
+    finished,
+  });
 
   return (
     <main className="scanline-overlay relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-10">
@@ -524,6 +533,14 @@ export default function TribeQuizPage() {
           </motion.div>
         )}
       </motion.div>
+
+      {/* ── Floating mute button ─────────────────────────────────────────── */}
+      <MuteButton
+        muted={muted}
+        onToggle={toggleMute}
+        onFirstClick={ensurePlay}
+        accent={finished ? theme.accent : "rgba(210,180,90,1)"}
+      />
     </main>
   );
 }

@@ -11,6 +11,8 @@ import {
   DynamicCorners,
   DynamicDivider,
 } from "@/components/DynamicQuiz";
+import { useBackgroundAudio } from "@/hooks/useBackgroundAudio";
+import { MuteButton } from "@/components/MuteButton";
 
 // ─── Static divider used during quiz phase (neutral gold, unchanged) ──────────
 const STATIC_DIVIDER = (
@@ -131,6 +133,13 @@ export default function CharacterQuizPage() {
     ? (CHARACTER_THEMES[winnerId] ?? FALLBACK_THEME)
     : FALLBACK_THEME;
 
+  // ── Background audio ─────────────────────────────────────────────────────
+  const { muted, toggleMute, ensurePlay } = useBackgroundAudio({
+    quizSrc: "/audio/characters-quiz.mp3",
+    resultSrc: "/audio/result.mp3",
+    finished,
+  });
+
   // ─── Ambient orb helper ──────────────────────────────────────────────────
   const resultCardBorder = finished
     ? theme.accentDim.replace("0.4", "0.5")
@@ -139,399 +148,410 @@ export default function CharacterQuizPage() {
   const resultCardBg = finished ? theme.cardBg : "rgba(2,10,5,0.55)";
 
   return (
-    <main className="scanline-overlay relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-10">
-      {/* ── Background ───────────────────────────────────────────────────── */}
-      <div
-        className="animate-slow-zoom absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/images/backgrounds/characters-bg.png')",
-        }}
-      />
-
-      {/* Base overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(2,8,4,0.35) 50%, rgba(0,0,0,0.55) 100%)",
-        }}
-      />
-
-      {/* Tinted radial — transitions to result color */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{
-          background: finished
-            ? `radial-gradient(ellipse at 50% 0%, ${theme.accentDim.replace("0.4", "0.12")} 0%, transparent 60%)`
-            : "radial-gradient(ellipse at 50% 0%, rgba(20,80,45,0.1) 0%, transparent 60%)",
-        }}
-        transition={{ duration: 1.4 }}
-      />
-
-      {/* Ambient orb A */}
-      <motion.div
-        className="animate-pulse-glow pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full"
-        animate={{
-          background: finished
-            ? theme.orbA
-            : "radial-gradient(circle, rgba(35,110,70,0.25) 0%, rgba(25,80,50,0.1) 50%, transparent 70%)",
-        }}
-        transition={{ duration: 1.4 }}
-        style={{ filter: "blur(8px)" }}
-      />
-
-      {/* Ambient orb B */}
-      <motion.div
-        className="animate-pulse-glow pointer-events-none absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full"
-        animate={{
-          background: finished
-            ? theme.orbB
-            : "radial-gradient(circle, rgba(35,110,70,0.18) 0%, rgba(25,80,50,0.08) 50%, transparent 70%)",
-        }}
-        transition={{ duration: 1.4, delay: 0.3 }}
-        style={{ filter: "blur(12px)", animationDelay: "2s" }}
-      />
-
-      {/* ── Back-to-home button ───────────────────────────────────────────── */}
-      <div className="relative z-20 w-full max-w-3xl mb-4 flex">
-        <Link
-          href={`/${locale}`}
-          className="border px-5 py-3 transition-all duration-300"
+    <>
+      <main className="scanline-overlay relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-10">
+        {/* ── Background ───────────────────────────────────────────────────── */}
+        <div
+          className="animate-slow-zoom absolute inset-0 bg-cover bg-center"
           style={{
-            fontFamily: "var(--font-cinzel)",
-            fontSize: "13px",
-            letterSpacing: "0.15em",
-            borderColor: "rgba(45,140,85,0.5)",
-            background: "rgba(2,10,5,0.5)",
-            color: "rgba(90,200,130,1)",
+            backgroundImage: "url('/images/backgrounds/characters-bg.png')",
           }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.background =
-              "rgba(35,110,70,0.18)";
-            (e.currentTarget as HTMLAnchorElement).style.borderColor =
-              "rgba(50,160,95,1)";
+        />
+
+        {/* Base overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(2,8,4,0.35) 50%, rgba(0,0,0,0.55) 100%)",
           }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.background =
-              "rgba(2,10,5,0.5)";
-            (e.currentTarget as HTMLAnchorElement).style.borderColor =
-              "rgba(45,140,85,0.5)";
+        />
+
+        {/* Tinted radial — transitions to result color */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: finished
+              ? `radial-gradient(ellipse at 50% 0%, ${theme.accentDim.replace("0.4", "0.12")} 0%, transparent 60%)`
+              : "radial-gradient(ellipse at 50% 0%, rgba(20,80,45,0.1) 0%, transparent 60%)",
           }}
+          transition={{ duration: 1.4 }}
+        />
+
+        {/* Ambient orb A */}
+        <motion.div
+          className="animate-pulse-glow pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full"
+          animate={{
+            background: finished
+              ? theme.orbA
+              : "radial-gradient(circle, rgba(35,110,70,0.25) 0%, rgba(25,80,50,0.1) 50%, transparent 70%)",
+          }}
+          transition={{ duration: 1.4 }}
+          style={{ filter: "blur(8px)" }}
+        />
+
+        {/* Ambient orb B */}
+        <motion.div
+          className="animate-pulse-glow pointer-events-none absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full"
+          animate={{
+            background: finished
+              ? theme.orbB
+              : "radial-gradient(circle, rgba(35,110,70,0.18) 0%, rgba(25,80,50,0.08) 50%, transparent 70%)",
+          }}
+          transition={{ duration: 1.4, delay: 0.3 }}
+          style={{ filter: "blur(12px)", animationDelay: "2s" }}
+        />
+
+        {/* ── Back-to-home button ───────────────────────────────────────────── */}
+        <div className="relative z-20 w-full max-w-3xl mb-4 flex">
+          <Link
+            href={`/${locale}`}
+            className="border px-5 py-3 transition-all duration-300"
+            style={{
+              fontFamily: "var(--font-cinzel)",
+              fontSize: "13px",
+              letterSpacing: "0.15em",
+              borderColor: "rgba(45,140,85,0.5)",
+              background: "rgba(2,10,5,0.5)",
+              color: "rgba(90,200,130,1)",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background =
+                "rgba(35,110,70,0.18)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor =
+                "rgba(50,160,95,1)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.background =
+                "rgba(2,10,5,0.5)";
+              (e.currentTarget as HTMLAnchorElement).style.borderColor =
+                "rgba(45,140,85,0.5)";
+            }}
+          >
+            ← {t("backHome")}
+          </Link>
+        </div>
+
+        {/* ── Main card ────────────────────────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            borderColor: resultCardBorder,
+            background: resultCardBg,
+          }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 w-full max-w-3xl border p-10"
+          style={{ backdropFilter: "blur(12px)" }}
         >
-          ← {t("backHome")}
-        </Link>
-      </div>
+          {/* Corners — static during quiz, dynamic when result is shown */}
+          {finished ? <DynamicCorners theme={theme} /> : <StaticCorners />}
 
-      {/* ── Main card ────────────────────────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          borderColor: resultCardBorder,
-          background: resultCardBg,
-        }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 w-full max-w-3xl border p-10"
-        style={{ backdropFilter: "blur(12px)" }}
-      >
-        {/* Corners — static during quiz, dynamic when result is shown */}
-        {finished ? <DynamicCorners theme={theme} /> : <StaticCorners />}
+          {/* ── QUIZ PHASE ───────────────────────────────────────────────── */}
+          {!finished ? (
+            <>
+              {/* Progress header */}
+              <div className="mb-8">
+                <div className="mb-3 flex justify-between items-center">
+                  <span
+                    style={{
+                      fontFamily: "var(--font-cinzel)",
+                      fontSize: "16px",
+                      letterSpacing: "0.2em",
+                      color: "rgba(90,200,130,1)",
+                    }}
+                  >
+                    {t("question")} {currentQuestion + 1}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-cinzel)",
+                      fontSize: "16px",
+                      letterSpacing: "0.15em",
+                      color: "rgba(45,140,85,0.9)",
+                    }}
+                  >
+                    {characterQuestions.length}
+                  </span>
+                </div>
+                <div
+                  className="h-1 w-full overflow-hidden"
+                  style={{ background: "rgba(35,110,70,0.2)" }}
+                >
+                  <div
+                    className="h-full transition-all duration-500"
+                    style={{
+                      width: `${((currentQuestion + 1) / characterQuestions.length) * 100}%`,
+                      background:
+                        "linear-gradient(to right, rgba(35,110,70,0.6), rgba(90,200,130,0.9))",
+                    }}
+                  />
+                </div>
+              </div>
 
-        {/* ── QUIZ PHASE ───────────────────────────────────────────────── */}
-        {!finished ? (
-          <>
-            {/* Progress header */}
-            <div className="mb-8">
-              <div className="mb-3 flex justify-between items-center">
-                <span
+              {STATIC_DIVIDER}
+
+              {/* Question text */}
+              <h1
+                className="mb-10 mt-6"
+                style={{
+                  fontFamily: "var(--font-cinzel)",
+                  fontSize: "22px",
+                  fontWeight: "700",
+                  letterSpacing: "0.05em",
+                  color: "rgba(160,230,190,1)",
+                  lineHeight: "1.5",
+                }}
+              >
+                {questionsT(question.question)}
+              </h1>
+
+              {/* Answer options */}
+              <div className="grid gap-4 mb-8">
+                {Object.entries(question.options).map(([key, option]) => (
+                  <button
+                    key={key}
+                    onClick={() => handleAnswer(option.points)}
+                    className="w-full border p-5 text-left transition-all duration-300"
+                    style={{
+                      fontFamily: "var(--font-cinzel)",
+                      fontSize: "16px",
+                      letterSpacing: "0.03em",
+                      borderColor: "rgba(35,110,70,0.5)",
+                      background: "rgba(35,110,70,0.1)",
+                      color: "rgba(140,210,170,1)",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background =
+                        "rgba(35,110,70,0.22)";
+                      (e.currentTarget as HTMLButtonElement).style.borderColor =
+                        "rgba(50,160,95,0.8)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLButtonElement).style.background =
+                        "rgba(35,110,70,0.1)";
+                      (e.currentTarget as HTMLButtonElement).style.borderColor =
+                        "rgba(35,110,70,0.5)";
+                    }}
+                  >
+                    <span
+                      className="mr-3 font-bold uppercase"
+                      style={{ color: "rgba(90,200,130,1)", fontSize: "17px" }}
+                    >
+                      {key}.
+                    </span>
+                    {questionsT(option.text)}
+                  </button>
+                ))}
+              </div>
+
+              {STATIC_DIVIDER}
+
+              {/* Back button */}
+              <div className="mt-6">
+                <button
+                  onClick={handleBack}
+                  disabled={currentQuestion === 0}
+                  className="border px-5 py-2 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
                   style={{
                     fontFamily: "var(--font-cinzel)",
-                    fontSize: "16px",
-                    letterSpacing: "0.2em",
+                    fontSize: "14px",
+                    letterSpacing: "0.15em",
+                    borderColor: "rgba(45,140,85,0.5)",
+                    background: "transparent",
                     color: "rgba(90,200,130,1)",
                   }}
-                >
-                  {t("question")} {currentQuestion + 1}
-                </span>
-                <span
-                  style={{
-                    fontFamily: "var(--font-cinzel)",
-                    fontSize: "16px",
-                    letterSpacing: "0.15em",
-                    color: "rgba(45,140,85,0.9)",
-                  }}
-                >
-                  {characterQuestions.length}
-                </span>
-              </div>
-              <div
-                className="h-1 w-full overflow-hidden"
-                style={{ background: "rgba(35,110,70,0.2)" }}
-              >
-                <div
-                  className="h-full transition-all duration-500"
-                  style={{
-                    width: `${((currentQuestion + 1) / characterQuestions.length) * 100}%`,
-                    background:
-                      "linear-gradient(to right, rgba(35,110,70,0.6), rgba(90,200,130,0.9))",
-                  }}
-                />
-              </div>
-            </div>
-
-            {STATIC_DIVIDER}
-
-            {/* Question text */}
-            <h1
-              className="mb-10 mt-6"
-              style={{
-                fontFamily: "var(--font-cinzel)",
-                fontSize: "22px",
-                fontWeight: "700",
-                letterSpacing: "0.05em",
-                color: "rgba(160,230,190,1)",
-                lineHeight: "1.5",
-              }}
-            >
-              {questionsT(question.question)}
-            </h1>
-
-            {/* Answer options */}
-            <div className="grid gap-4 mb-8">
-              {Object.entries(question.options).map(([key, option]) => (
-                <button
-                  key={key}
-                  onClick={() => handleAnswer(option.points)}
-                  className="w-full border p-5 text-left transition-all duration-300"
-                  style={{
-                    fontFamily: "var(--font-cinzel)",
-                    fontSize: "16px",
-                    letterSpacing: "0.03em",
-                    borderColor: "rgba(35,110,70,0.5)",
-                    background: "rgba(35,110,70,0.1)",
-                    color: "rgba(140,210,170,1)",
-                  }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.background =
-                      "rgba(35,110,70,0.22)";
-                    (e.currentTarget as HTMLButtonElement).style.borderColor =
-                      "rgba(50,160,95,0.8)";
+                    if (currentQuestion !== 0)
+                      (e.currentTarget as HTMLButtonElement).style.background =
+                        "rgba(35,110,70,0.15)";
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.background =
-                      "rgba(35,110,70,0.1)";
-                    (e.currentTarget as HTMLButtonElement).style.borderColor =
-                      "rgba(35,110,70,0.5)";
+                      "transparent";
                   }}
                 >
-                  <span
-                    className="mr-3 font-bold uppercase"
-                    style={{ color: "rgba(90,200,130,1)", fontSize: "17px" }}
-                  >
-                    {key}.
-                  </span>
-                  {questionsT(option.text)}
+                  ← {t("previous")}
                 </button>
-              ))}
-            </div>
+              </div>
+            </>
+          ) : (
+            /* ── RESULT PHASE ──────────────────────────────────────────────── */
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="text-center"
+            >
+              {/* "Your character" label with dynamic divider lines */}
+              <div className="flex items-center gap-4 mb-8">
+                <motion.div
+                  className="h-px flex-1"
+                  initial={{
+                    background:
+                      "linear-gradient(to right, transparent, rgba(35,110,70,0.7))",
+                  }}
+                  animate={{
+                    background: `linear-gradient(to right, transparent, ${theme.accentMid})`,
+                  }}
+                  transition={{ duration: 1.2 }}
+                />
+                <motion.span
+                  initial={{ color: "rgba(90,200,130,1)" }}
+                  animate={{ color: theme.accent }}
+                  transition={{ duration: 1.2 }}
+                  style={{
+                    fontFamily: "var(--font-cinzel)",
+                    fontSize: "16px",
+                    letterSpacing: "0.4em",
+                  }}
+                >
+                  {t("yourCharacter")}
+                </motion.span>
+                <motion.div
+                  className="h-px flex-1"
+                  initial={{
+                    background:
+                      "linear-gradient(to left, transparent, rgba(35,110,70,0.7))",
+                  }}
+                  animate={{
+                    background: `linear-gradient(to left, transparent, ${theme.accentMid})`,
+                  }}
+                  transition={{ duration: 1.2 }}
+                />
+              </div>
 
-            {STATIC_DIVIDER}
-
-            {/* Back button */}
-            <div className="mt-6">
-              <button
-                onClick={handleBack}
-                disabled={currentQuestion === 0}
-                className="border px-5 py-2 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
+              {/* ── Character name with full theme gradient ─────────────────── */}
+              <motion.h1
+                className="mb-6"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.15 }}
                 style={{
-                  fontFamily: "var(--font-cinzel)",
-                  fontSize: "14px",
-                  letterSpacing: "0.15em",
-                  borderColor: "rgba(45,140,85,0.5)",
-                  background: "transparent",
-                  color: "rgba(90,200,130,1)",
-                }}
-                onMouseEnter={(e) => {
-                  if (currentQuestion !== 0)
-                    (e.currentTarget as HTMLButtonElement).style.background =
-                      "rgba(35,110,70,0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.background =
-                    "transparent";
+                  fontFamily: "var(--font-cinzel-deco)",
+                  fontSize: "clamp(40px, 8vw, 72px)",
+                  fontWeight: "900",
+                  letterSpacing: "0.2em",
+                  color: "transparent",
+                  background: `linear-gradient(180deg, ${theme.gradientTop} 0%, ${theme.gradientMid} 35%, ${theme.gradientBot} 65%, ${theme.gradientMid} 100%)`,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  filter: `drop-shadow(0 0 24px ${theme.glowColor})`,
                 }}
               >
-                ← {t("previous")}
-              </button>
-            </div>
-          </>
-        ) : (
-          /* ── RESULT PHASE ──────────────────────────────────────────────── */
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="text-center"
-          >
-            {/* "Your character" label with dynamic divider lines */}
-            <div className="flex items-center gap-4 mb-8">
-              <motion.div
-                className="h-px flex-1"
-                initial={{
-                  background:
-                    "linear-gradient(to right, transparent, rgba(35,110,70,0.7))",
-                }}
-                animate={{
-                  background: `linear-gradient(to right, transparent, ${theme.accentMid})`,
-                }}
-                transition={{ duration: 1.2 }}
+                {winningCharacter?.name}
+              </motion.h1>
+
+              <DynamicDivider theme={theme} />
+
+              {/* Character image */}
+              <motion.img
+                src={winningCharacter?.image}
+                alt={winningCharacter?.name}
+                className="mx-auto my-8 max-h-[420px] w-auto object-contain"
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.3 }}
+                style={{ filter: `drop-shadow(0 0 32px ${theme.imageShadow})` }}
               />
-              <motion.span
-                initial={{ color: "rgba(90,200,130,1)" }}
-                animate={{ color: theme.accent }}
-                transition={{ duration: 1.2 }}
+
+              <DynamicDivider theme={theme} />
+
+              {/* Description */}
+              <motion.p
+                className="mx-auto max-w-2xl mt-6 leading-relaxed"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
                 style={{
                   fontFamily: "var(--font-cinzel)",
                   fontSize: "16px",
-                  letterSpacing: "0.4em",
+                  color: theme.bodyText,
+                  letterSpacing: "0.03em",
+                  lineHeight: "1.9",
                 }}
               >
-                {t("yourCharacter")}
-              </motion.span>
-              <motion.div
-                className="h-px flex-1"
-                initial={{
-                  background:
-                    "linear-gradient(to left, transparent, rgba(35,110,70,0.7))",
-                }}
-                animate={{
-                  background: `linear-gradient(to left, transparent, ${theme.accentMid})`,
-                }}
-                transition={{ duration: 1.2 }}
-              />
-            </div>
+                {winningCharacter && charactersT(winningCharacter.description)}
+              </motion.p>
 
-            {/* ── Character name with full theme gradient ─────────────────── */}
-            <motion.h1
-              className="mb-6"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15 }}
-              style={{
-                fontFamily: "var(--font-cinzel-deco)",
-                fontSize: "clamp(40px, 8vw, 72px)",
-                fontWeight: "900",
-                letterSpacing: "0.2em",
-                color: "transparent",
-                background: `linear-gradient(180deg, ${theme.gradientTop} 0%, ${theme.gradientMid} 35%, ${theme.gradientBot} 65%, ${theme.gradientMid} 100%)`,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                filter: `drop-shadow(0 0 24px ${theme.glowColor})`,
-              }}
-            >
-              {winningCharacter?.name}
-            </motion.h1>
-
-            <DynamicDivider theme={theme} />
-
-            {/* Character image */}
-            <motion.img
-              src={winningCharacter?.image}
-              alt={winningCharacter?.name}
-              className="mx-auto my-8 max-h-[420px] w-auto object-contain"
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, delay: 0.3 }}
-              style={{ filter: `drop-shadow(0 0 32px ${theme.imageShadow})` }}
-            />
-
-            <DynamicDivider theme={theme} />
-
-            {/* Description */}
-            <motion.p
-              className="mx-auto max-w-2xl mt-6 leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              style={{
-                fontFamily: "var(--font-cinzel)",
-                fontSize: "16px",
-                color: theme.bodyText,
-                letterSpacing: "0.03em",
-                lineHeight: "1.9",
-              }}
-            >
-              {winningCharacter && charactersT(winningCharacter.description)}
-            </motion.p>
-
-            {/* ── Restart button — fully themed ───────────────────────────── */}
-            <motion.button
-              onClick={() => window.location.reload()}
-              className="mt-10 border px-8 py-4 transition-all duration-300"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.65 }}
-              style={{
-                fontFamily: "var(--font-cinzel)",
-                fontSize: "16px",
-                letterSpacing: "0.2em",
-                borderColor: theme.accentDim.replace("0.4", "0.6"),
-                background: theme.accentDim.replace("0.4", "0.1"),
-                color: theme.accent,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background =
-                  theme.accentDim.replace("0.4", "0.22");
-                (e.currentTarget as HTMLButtonElement).style.borderColor =
-                  theme.accent;
-                (e.currentTarget as HTMLButtonElement).style.boxShadow =
-                  `0 0 18px ${theme.glowColor}`;
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background =
-                  theme.accentDim.replace("0.4", "0.1");
-                (e.currentTarget as HTMLButtonElement).style.borderColor =
-                  theme.accentDim.replace("0.4", "0.6");
-                (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
-              }}
-            >
-              ↺ {t("restartQuiz")}
-            </motion.button>
-
-            {/* Bottom separator */}
-            <motion.div
-              className="flex items-center gap-4 mt-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
-              <div
-                className="h-px flex-1"
-                style={{
-                  background: `linear-gradient(to right, transparent, ${theme.accentDim.replace("0.4", "0.35")})`,
-                }}
-              />
-              <span
+              {/* ── Restart button — fully themed ───────────────────────────── */}
+              <motion.button
+                onClick={() => window.location.reload()}
+                className="mt-10 border px-8 py-4 transition-all duration-300"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.65 }}
                 style={{
                   fontFamily: "var(--font-cinzel)",
-                  fontSize: "13px",
-                  letterSpacing: "0.5em",
-                  color: theme.accentMid,
+                  fontSize: "16px",
+                  letterSpacing: "0.2em",
+                  borderColor: theme.accentDim.replace("0.4", "0.6"),
+                  background: theme.accentDim.replace("0.4", "0.1"),
+                  color: theme.accent,
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background =
+                    theme.accentDim.replace("0.4", "0.22");
+                  (e.currentTarget as HTMLButtonElement).style.borderColor =
+                    theme.accent;
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                    `0 0 18px ${theme.glowColor}`;
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background =
+                    theme.accentDim.replace("0.4", "0.1");
+                  (e.currentTarget as HTMLButtonElement).style.borderColor =
+                    theme.accentDim.replace("0.4", "0.6");
+                  (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                    "none";
                 }}
               >
-                {t("classificated")}
-              </span>
-              <div
-                className="h-px flex-1"
-                style={{
-                  background: `linear-gradient(to left, transparent, ${theme.accentDim.replace("0.4", "0.35")})`,
-                }}
-              />
+                ↺ {t("restartQuiz")}
+              </motion.button>
+
+              {/* Bottom separator */}
+              <motion.div
+                className="flex items-center gap-4 mt-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                <div
+                  className="h-px flex-1"
+                  style={{
+                    background: `linear-gradient(to right, transparent, ${theme.accentDim.replace("0.4", "0.35")})`,
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: "var(--font-cinzel)",
+                    fontSize: "13px",
+                    letterSpacing: "0.5em",
+                    color: theme.accentMid,
+                  }}
+                >
+                  {t("classificated")}
+                </span>
+                <div
+                  className="h-px flex-1"
+                  style={{
+                    background: `linear-gradient(to left, transparent, ${theme.accentDim.replace("0.4", "0.35")})`,
+                  }}
+                />
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </motion.div>
-    </main>
+          )}
+        </motion.div>
+      </main>
+
+      {/* ── Floating mute button — outside <main> to avoid scanline z-index trap */}
+      <MuteButton
+        muted={muted}
+        onToggle={toggleMute}
+        onFirstClick={ensurePlay}
+        accent={finished ? theme.accent : "rgba(90,200,130,1)"}
+      />
+    </>
   );
 }
