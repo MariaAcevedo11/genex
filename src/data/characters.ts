@@ -5,48 +5,42 @@ export const characters: Character[] = [
   {
     id: "lia",
     name: "Lia",
-    description:
-      "Disciplined and determined, Lia struggles between loyalty to her own people and the growing doubt inside her.",
+    description: "lia_description",
     image: "/images/characters/lia.png",
   },
 
   {
     id: "amelia",
     name: "Amelia",
-    description:
-      "Deeply loyal and emotionally guarded, Amelia protects her people with fierce devotion.",
+    description: "amelia_description",
     image: "/images/characters/amelia.png",
   },
 
   {
     id: "adam",
     name: "Adam",
-    description:
-      "A powerful leader who believes humanity can only survive through order and control.",
+    description: "adam_description",
     image: "/images/characters/adam.png",
   },
 
   {
     id: "annie",
     name: "Annie",
-    description:
-      "Free-spirited and optimistic, Annie values movement, perspective and emotional freedom.",
+    description: "annie_description",
     image: "/images/characters/annie.png",
   },
 
   {
     id: "alex",
     name: "Alex",
-    description:
-      "Strategic and adaptable, Alex trusts intelligence and survival over emotional dependence.",
+    description: "alex_description",
     image: "/images/characters/alex.png",
   },
 
   {
     id: "paulo",
     name: "Paulo",
-    description:
-      "Calm and compassionate, Paulo believes survival means protecting and rebuilding together.",
+    description: "paulo_description",
     image: "/images/characters/paulo.png",
   },
 ];

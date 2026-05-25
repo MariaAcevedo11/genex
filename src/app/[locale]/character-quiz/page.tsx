@@ -9,6 +9,7 @@ import { useTranslations, useLocale } from "next-intl";
 export default function CharacterQuizPage() {
   const t = useTranslations("CharacterQuiz");
   const locale = useLocale();
+  const charactersT = useTranslations("Characters");
   const questionsT = useTranslations("CharacterQuestions");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [scores, setScores] = useState<Record<string, number>>({});
@@ -169,7 +170,7 @@ export default function CharacterQuizPage() {
             />
 
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-300">
-              {winningCharacter?.description}
+              {winningCharacter && charactersT(winningCharacter.description)}
             </p>
 
             <button

@@ -6,11 +6,11 @@ import Link from "next/link";
 import { tribeQuestions } from "@/data/tribeQuestions";
 import { tribes } from "@/data/tribes";
 import { useTranslations, useLocale } from "next-intl";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function TribeQuizPage() {
   const t = useTranslations("TribeQuiz");
   const locale = useLocale();
+  const tribesT = useTranslations("Tribes");
   const questionsT = useTranslations("TribeQuestions");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [scores, setScores] = useState<Record<string, number>>({});
@@ -166,7 +166,7 @@ export default function TribeQuizPage() {
             />
 
             <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-300">
-              {winningTribe?.description}
+              {winningTribe && tribesT(winningTribe.description)}
             </p>
 
             <button
