@@ -5,7 +5,7 @@
         "tribeButton": "Descubre Tu Tribu",
         "characterButton": "Descubre Tu Personaje",
         "world": "El mundo después de la radiación",
-        "era": "Era Post-Salvación",
+        "era": "Era Post-Fractura",
         "classificated": "GENEX · CLASIFICADO"
     },
     "TribeQuiz": {
@@ -13,14 +13,16 @@
         "question": "Pregunta",
         "back": "Atrás",
         "yourTribe": "Tu tribu es",
-        "restartQuiz": "Reiniciar Quiz"
+        "restartQuiz": "Reiniciar Quiz",
+        "classificated": "GENEX · CLASIFICADO"
     },
     "CharacterQuiz": {
         "backHome": "Volver al Inicio",
         "question": "Pregunta",
         "previous": "Atrás",
         "yourCharacter": "Tu personaje es",
-        "restartQuiz": "Reiniciar Quiz"
+        "restartQuiz": "Reiniciar Quiz",
+        "classificated": "GENEX · CLASIFICADO"
     },
     "TribeQuestions": {
         "q1_question": "En una situación peligrosa, ¿qué es lo más importante?",

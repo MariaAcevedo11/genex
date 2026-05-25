@@ -5,7 +5,7 @@
         "tribeButton": "Discover Your Tribe",
         "characterButton": "Discover Your Character",
         "world" : "The world after radiation", 
-        "era" : "Era Post-Salvation", 
+        "era" : "Era Post-Fracture", 
         "classificated" : "GENEX · CLASSIFIED"
     },
     "TribeQuiz": {
@@ -13,14 +13,16 @@
         "question": "Question",
         "back": "Back",
         "yourTribe": "Your tribe is",
-        "restartQuiz": "Restart Quiz"
+        "restartQuiz": "Restart Quiz", 
+        "classificated" : "GENEX · CLASSIFIED"
     },
     "CharacterQuiz": {
         "backHome": "Back Home",
         "question": "Question",
         "previous": "Previous",
         "yourCharacter": "Your character is",
-        "restartQuiz": "Restart Quiz"
+        "restartQuiz": "Restart Quiz",
+        "classificated" : "GENEX · CLASSIFIED"
     },
     "TribeQuestions": {
         "q1_question": "In a dangerous situation, what matters most?",
