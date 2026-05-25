@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cinzel, Cinzel_Decorative } from "next/font/google";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
   subsets: ["latin"],
+  weight: ["400", "700", "900"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const cinzelDeco = Cinzel_Decorative({
+  variable: "--font-cinzel-deco",
   subsets: ["latin"],
+  weight: ["400", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({
     <html
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${cinzel.variable} ${cinzelDeco.variable} h-full antialiased`}
     >
       <body className="overflow-x-hidden bg-black text-white">{children}</body>
     </html>

@@ -3,7 +3,10 @@
         "title": "GENEX",
         "subtitle": "Discover your tribe. Discover your character. Know the world after humanity.",
         "tribeButton": "Discover Your Tribe",
-        "characterButton": "Discover Your Character"
+        "characterButton": "Discover Your Character",
+        "world" : "The world after radiation", 
+        "era" : "Era Post-Salvation", 
+        "classificated" : "GENEX · CLASSIFIED"
     },
     "TribeQuiz": {
         "backHome": "Back Home",
