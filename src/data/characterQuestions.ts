@@ -3,312 +3,312 @@ import { Question } from "@/types/question";
 
 export const characterQuestions: Question[] = [
   {
-    question: "Which feeling defines you the most deep inside?",
+    question: "q1_question",
 
     options: {
       a: {
-        text: "Compassion",
+        text: "q1_a",
         points: { paulo: 2, annie: 1 },
       },
 
       b: {
-        text: "Caution",
+        text: "q1_b",
         points: { alex: 2 },
       },
 
       c: {
-        text: "Determination",
+        text: "q1_c",
         points: { lia: 2, adam: 3 },
       },
 
       d: {
-        text: "Attachment",
+        text: "q1_d",
         points: { amelia: 2 },
       },
     },
   },
 
   {
-    question: "How do others usually see you?",
+    question: "q2_question",
 
     options: {
       a: {
-        text: "Energetic and optimistic",
+        text: "q2_a",
         points: { annie: 2 },
       },
 
       b: {
-        text: "Focused and intense",
+        text: "q2_b",
         points: { lia: 2 },
       },
 
       c: {
-        text: "Difficult to fully understand",
+        text: "q2_c",
         points: { alex: 2, amelia: 1 },
       },
 
       d: {
-        text: "Calm and trustworthy",
+        text: "q2_d",
         points: { paulo: 2 },
       },
     },
   },
 
   {
-    question: "What would hurt you the most?",
+    question: "q3_question",
 
     options: {
       a: {
-        text: "Depending emotionally on the wrong person",
+        text: "q3_a",
         points: { alex: 2 },
       },
 
       b: {
-        text: "Failing the expectations placed on me",
+        text: "q3_b",
         points: { lia: 2, adam: 2 },
       },
 
       c: {
-        text: "Losing my freedom",
+        text: "q3_c",
         points: { annie: 2 },
       },
 
       d: {
-        text: "Being betrayed by someone close",
+        text: "q3_d",
         points: { amelia: 2 },
       },
     },
   },
 
   {
-    question: "What kind of burden do you carry most often?",
+    question: "q4_question",
 
     options: {
       a: {
-        text: "Responsibility for others",
+        text: "q4_a",
         points: { paulo: 2, annie: 1 },
       },
 
       b: {
-        text: "Emotional attachment",
+        text: "q4_b",
         points: { amelia: 2 },
       },
 
       c: {
-        text: "Expectations",
+        text: "q4_c",
         points: { lia: 2, adam: 1 },
       },
 
       d: {
-        text: "Constant vigilance",
+        text: "q4_d",
         points: { alex: 2 },
       },
     },
   },
 
   {
-    question: "What is your greatest strength?",
+    question: "q5_question",
 
     options: {
       a: {
-        text: "My optimism and perspective",
+        text: "q5_a",
         points: { annie: 2 },
       },
 
       b: {
-        text: "My ability to adapt",
+        text: "q5_b",
         points: { alex: 2 },
       },
 
       c: {
-        text: "My discipline",
+        text: "q5_c",
         points: { lia: 2, adam: 1 },
       },
 
       d: {
-        text: "My loyalty to others",
+        text: "q5_d",
         points: { amelia: 2, paulo: 1 },
       },
     },
   },
 
   {
-    question: "How do you react under pressure?",
+    question: "q6_question",
 
     options: {
       a: {
-        text: "I analyze every possible outcome",
+        text: "q6_a",
         points: { alex: 2 },
       },
 
       b: {
-        text: "I trust my instincts and stay flexible",
+        text: "q6_b",
         points: { annie: 1, amelia: 1 },
       },
 
       c: {
-        text: "I stay calm for the people around me",
+        text: "q6_c",
         points: { paulo: 2 },
       },
 
       d: {
-        text: "I push myself even harder",
+        text: "q6_d",
         points: { lia: 2 },
       },
     },
   },
 
   {
-    question: "How do you usually protect yourself emotionally?",
+    question: "q7_question",
 
     options: {
       a: {
-        text: "By never fully depending on anyone",
+        text: "q7_a",
         points: { alex: 2 },
       },
 
       b: {
-        text: "By pretending everything is okay",
+        text: "q7_b",
         points: { annie: 2, paulo: 1 },
       },
 
       c: {
-        text: "By staying disciplined",
+        text: "q7_c",
         points: { lia: 2, adam: 2 },
       },
 
       d: {
-        text: "By only trusting a few people",
+        text: "q7_d",
         points: { amelia: 2 },
       },
     },
   },
 
   {
-    question: "What would people misunderstand about you the most?",
+    question: "q8_question",
 
     options: {
       a: {
-        text: "My optimism",
+        text: "q8_a",
         points: { annie: 2, paulo: 1 },
       },
 
       b: {
-        text: "My adaptability",
+        text: "q8_b",
         points: { alex: 2 },
       },
 
       c: {
-        text: "My emotional distance",
+        text: "q8_c",
         points: { amelia: 2, alex: 1 },
       },
 
       d: {
-        text: "My intensity",
+        text: "q8_d",
         points: { lia: 2, adam: 3 },
       },
     },
   },
 
   {
-    question: "What kind of mistake is hardest to forgive in yourself?",
+    question: "q9_question",
 
     options: {
       a: {
-        text: "Trusting the wrong person",
+        text: "q9_a",
         points: { alex: 2 },
       },
 
       b: {
-        text: "Causing pain without meaning to",
+        text: "q9_b",
         points: { annie: 2, paulo: 1 },
       },
 
       c: {
-        text: "Not being strong enough when it mattered",
+        text: "q9_c",
         points: { adam: 3, lia: 1 },
       },
 
       d: {
-        text: "Failing someone who trusted me",
+        text: "q9_d",
         points: { amelia: 2, paulo: 1 },
       },
     },
   },
 
   {
-    question: "What do you fear becoming?",
+    question: "q10_question",
 
     options: {
       a: {
-        text: "Someone who loses their humanity",
+        text: "q10_a",
         points: { paulo: 2 },
       },
 
       b: {
-        text: "Emotionally dependent",
+        text: "q10_b",
         points: { alex: 2 },
       },
 
       c: {
-        text: "Weak or irrelevant",
+        text: "q10_c",
         points: { adam: 2, lia: 1 },
       },
 
       d: {
-        text: "Completely alone",
+        text: "q10_d",
         points: { amelia: 2 },
       },
     },
   },
 
   {
-    question: "What kind of connection do you value most?",
+    question: "q11_question",
 
     options: {
       a: {
-        text: "Peaceful companionship",
+        text: "q11_a",
         points: { paulo: 2 },
       },
 
       b: {
-        text: "Mutual respect",
+        text: "q11_b",
         points: { adam: 3, lia: 1 },
       },
 
       c: {
-        text: "Emotional trust",
+        text: "q11_c",
         points: { amelia: 2 },
       },
 
       d: {
-        text: "Intellectual understanding",
+        text: "q11_d",
         points: { alex: 2, annie: 1 },
       },
     },
   },
 
   {
-    question: "What gives you peace?",
+    question: "q12_question",
 
     options: {
       a: {
-        text: "Feeling free and emotionally alive",
+        text: "q12_a",
         points: { annie: 2 },
       },
 
       b: {
-        text: "Knowing I can survive on my own",
+        text: "q12_b",
         points: { alex: 2 },
       },
 
       c: {
-        text: "Being surrounded by people I love",
+        text: "q12_c",
         points: { paulo: 2, amelia: 1 },
       },
 
       d: {
-        text: "Knowing I fulfilled my duty",
+        text: "q12_d",
         points: { lia: 2 },
       },
     },

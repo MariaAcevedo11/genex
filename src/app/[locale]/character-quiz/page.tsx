@@ -4,12 +4,14 @@ import { useState } from "react";
 import { characterQuestions } from "@/data/characterQuestions";
 import { characters } from "@/data/characters";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function CharacterQuizPage() {
+  const t = useTranslations("CharacterQuiz");
+  const locale = useLocale();
+  const questionsT = useTranslations("CharacterQuestions");
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
   const [scores, setScores] = useState<Record<string, number>>({});
-
   const [finished, setFinished] = useState(false);
   const [history, setHistory] = useState<
     {
@@ -88,10 +90,10 @@ export default function CharacterQuizPage() {
       <div className="absolute bottom-10 right-10 h-[300px] w-[300px] rounded-full bg-purple-500/20 blur-3xl" />
 
       <Link
-        href="/"
+        href={`/${locale}`}
         className="absolute left-6 top-6 z-20 rounded-2xl border border-white/10 bg-black/30 px-5 py-3 text-sm font-semibold text-white backdrop-blur-md transition hover:border-cyan-400/40 hover:bg-cyan-400/10"
       >
-        ← Back Home
+        ← {t("backHome")}
       </Link>
 
       {/* Card */}
@@ -101,7 +103,9 @@ export default function CharacterQuizPage() {
             {/* Progress */}
             <div className="mb-8">
               <div className="mb-2 flex justify-between text-sm text-gray-400">
-                <span>Question {currentQuestion + 1}</span>
+                <span>
+                  {t("question")} {currentQuestion + 1}
+                </span>
 
                 <span>{characterQuestions.length}</span>
               </div>
@@ -120,7 +124,7 @@ export default function CharacterQuizPage() {
 
             {/* Question */}
             <h1 className="mb-10 text-3xl font-bold text-white">
-              {question.question}
+              {questionsT(question.question)}
             </h1>
 
             <div className="mb-6 flex">
@@ -129,7 +133,7 @@ export default function CharacterQuizPage() {
                 disabled={currentQuestion === 0}
                 className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300 transition hover:border-cyan-400/40 hover:bg-cyan-400/10 disabled:opacity-30"
               >
-                ← Previous
+                ← {t("previous")}
               </button>
             </div>
 
@@ -145,14 +149,14 @@ export default function CharacterQuizPage() {
                     {key}
                   </span>
 
-                  {option.text}
+                  {questionsT(option.text)}
                 </button>
               ))}
             </div>
           </>
         ) : (
           <div className="text-center">
-            <p className="mb-4 text-gray-400">Your character is</p>
+            <p className="mb-4 text-gray-400">{t("yourCharacter")}</p>
 
             <h1 className="mb-6 text-6xl font-black tracking-[0.2em]">
               {winningCharacter?.name}
@@ -172,7 +176,7 @@ export default function CharacterQuizPage() {
               onClick={() => window.location.reload()}
               className="mt-10 rounded-2xl bg-cyan-500/20 px-8 py-4 font-semibold transition hover:bg-cyan-500/30"
             >
-              Restart Quiz
+              {t("restartQuiz")}
             </button>
           </div>
         )}

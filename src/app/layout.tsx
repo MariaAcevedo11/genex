@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,6 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "GENEX",
+
   description: "Discover your tribe and character in the world of GENEX.",
 };
 
@@ -24,11 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="bg-black text-white overflow-x-hidden">{children}</body>
+      <body className="overflow-x-hidden bg-black text-white">{children}</body>
     </html>
   );
 }

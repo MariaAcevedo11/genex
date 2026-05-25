@@ -3,311 +3,312 @@ import { Question } from "@/types/question";
 
 export const tribeQuestions: Question[] = [
   {
-    question: "In a dangerous situation, what matters most?",
+    question: "q1_question",
 
     options: {
       a: {
-        text: "Maintaining control over everyone",
+        text: "q1_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Protecting the people closest to me",
+        text: "q1_b",
         points: { lupus: 2, phantus: 1 },
       },
 
       c: {
-        text: "Finding the smartest way to survive",
+        text: "q1_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Understanding the situation before acting",
+        text: "q1_d",
         points: { avis: 2 },
       },
     },
   },
 
   {
-    question: "What kind of environment feels most natural to you?",
+    question: "q2_question",
 
     options: {
       a: {
-        text: "A powerful city full of order and hierarchy",
+        text: "q2_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "A hidden place far from outsiders",
+        text: "q2_b",
         points: { lupus: 2 },
       },
 
       c: {
-        text: "Ruins filled with secrets and opportunities",
+        text: "q2_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "High places open to the sky and wind",
+        text: "q2_d",
         points: { avis: 2 },
       },
     },
   },
 
   {
-    question: "How do you usually deal with conflict?",
+    question: "q3_question",
 
     options: {
       a: {
-        text: "Confront it directly and take charge",
+        text: "q3_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Stay close to the people I trust",
+        text: "q3_b",
         points: { lupus: 2 },
       },
 
       c: {
-        text: "Outthink the situation before reacting",
+        text: "q3_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Remain calm and analyze every side",
+        text: "q3_d",
         points: { avis: 1, phantus: 1 },
       },
     },
   },
 
   {
-    question: "What gives life meaning to you?",
+    question: "q4_question",
 
     options: {
       a: {
-        text: "Achievement and recognition",
+        text: "q4_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Connection and belonging",
+        text: "q4_b",
         points: { lupus: 2 },
       },
 
       c: {
-        text: "Freedom to evolve and adapt",
+        text: "q4_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Peace and preservation",
+        text: "q4_d",
         points: { phantus: 2 },
       },
     },
   },
+
   {
-    question: "What kind of people do you admire the most?",
+    question: "q5_question",
 
     options: {
       a: {
-        text: "Those capable of leading others",
+        text: "q5_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Those who never abandon their group",
+        text: "q5_b",
         points: { lupus: 2 },
       },
 
       c: {
-        text: "Those who can survive any situation",
+        text: "q5_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Those who stay wise and calm under pressure",
+        text: "q5_d",
         points: { avis: 1, phantus: 1 },
       },
     },
   },
 
   {
-    question: "How do you react when someone betrays you?",
+    question: "q6_question",
 
     options: {
       a: {
-        text: "They lose all respect in my eyes",
+        text: "q6_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "It hurts deeply and is difficult to forgive",
+        text: "q6_b",
         points: { lupus: 2 },
       },
 
       c: {
-        text: "I learn from it and become more careful",
+        text: "q6_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "I try to understand why it happened first",
+        text: "q6_d",
         points: { avis: 2 },
       },
     },
   },
 
   {
-    question: "What role would you naturally take in a group?",
+    question: "q7_question",
 
     options: {
       a: {
-        text: "Leader",
+        text: "q7_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Protector",
+        text: "q7_b",
         points: { lupus: 2, phantus: 1 },
       },
 
       c: {
-        text: "Strategist",
+        text: "q7_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Observer",
+        text: "q7_d",
         points: { avis: 2 },
       },
     },
   },
 
   {
-    question: "Which idea resonates with you the most?",
+    question: "q8_question",
 
     options: {
       a: {
-        text: "Power earns respect",
+        text: "q8_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Trust is everything",
+        text: "q8_b",
         points: { lupus: 2 },
       },
 
       c: {
-        text: "Only those who adapt survive",
+        text: "q8_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Knowledge changes perspective",
+        text: "q8_d",
         points: { avis: 2 },
       },
     },
   },
 
   {
-    question: "What would be your greatest fear?",
+    question: "q9_question",
 
     options: {
       a: {
-        text: "Being seen as weak",
+        text: "q9_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Losing the people I love",
+        text: "q9_b",
         points: { lupus: 2, phantus: 1 },
       },
 
       c: {
-        text: "Losing control over my future",
+        text: "q9_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Living without purpose or direction",
+        text: "q9_d",
         points: { avis: 2 },
       },
     },
   },
 
   {
-    question: "What kind of future would you fight for?",
+    question: "q10_question",
 
     options: {
       a: {
-        text: "A powerful and respected civilization",
+        text: "q10_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "A safe place for my people",
+        text: "q10_b",
         points: { lupus: 2 },
       },
 
       c: {
-        text: "A world where survival depends on intelligence",
+        text: "q10_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "A balanced world connected through understanding",
+        text: "q10_d",
         points: { avis: 1, phantus: 1 },
       },
     },
   },
 
   {
-    question: "How do you make important decisions?",
+    question: "q11_question",
 
     options: {
       a: {
-        text: "Quickly and confidently",
+        text: "q11_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Thinking about the people involved",
+        text: "q11_b",
         points: { lupus: 2 },
       },
 
       c: {
-        text: "Analyzing every possible outcome",
+        text: "q11_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Taking distance before choosing",
+        text: "q11_d",
         points: { avis: 2 },
       },
     },
   },
 
   {
-    question: "What kind of energy attracts you the most?",
+    question: "q12_question",
 
     options: {
       a: {
-        text: "Intensity and ambition",
+        text: "q12_a",
         points: { leo: 2 },
       },
 
       b: {
-        text: "Warmth and emotional connection",
+        text: "q12_b",
         points: { lupus: 2, phantus: 1 },
       },
 
       c: {
-        text: "Mystery and unpredictability",
+        text: "q12_c",
         points: { dentes: 2 },
       },
 
       d: {
-        text: "Calmness and clarity",
+        text: "q12_d",
         points: { avis: 2, phantus: 1 },
       },
     },
