@@ -101,7 +101,7 @@ export const tribeQuestions: Question[] = [
 
       d: {
         text: "q4_d",
-        points: { phantus: 2 },
+        points: { phantus: 4 },
       },
     },
   },
@@ -127,7 +127,7 @@ export const tribeQuestions: Question[] = [
 
       d: {
         text: "q5_d",
-        points: { avis: 1, phantus: 1 },
+        points: { avis: 1, phantus: 2 },
       },
     },
   },
@@ -153,7 +153,7 @@ export const tribeQuestions: Question[] = [
 
       d: {
         text: "q6_d",
-        points: { avis: 2 },
+        points: { avis: 2 , phantus: 2},
       },
     },
   },
@@ -169,7 +169,7 @@ export const tribeQuestions: Question[] = [
 
       b: {
         text: "q7_b",
-        points: { lupus: 2, phantus: 1 },
+        points: { lupus: 2, phantus: 2 },
       },
 
       c: {
@@ -221,7 +221,7 @@ export const tribeQuestions: Question[] = [
 
       b: {
         text: "q9_b",
-        points: { lupus: 2, phantus: 1 },
+        points: { lupus: 2, phantus: 2 },
       },
 
       c: {
@@ -257,7 +257,7 @@ export const tribeQuestions: Question[] = [
 
       d: {
         text: "q10_d",
-        points: { avis: 1, phantus: 1 },
+        points: { avis: 1, phantus: 2 },
       },
     },
   },
@@ -299,7 +299,7 @@ export const tribeQuestions: Question[] = [
 
       b: {
         text: "q12_b",
-        points: { lupus: 2, phantus: 1 },
+        points: { lupus: 2, phantus: 3 },
       },
 
       c: {
@@ -309,7 +309,7 @@ export const tribeQuestions: Question[] = [
 
       d: {
         text: "q12_d",
-        points: { avis: 2, phantus: 1 },
+        points: { avis: 2, phantus: 2 },
       },
     },
   },

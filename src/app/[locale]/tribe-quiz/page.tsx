@@ -6,8 +6,15 @@ import { tribeQuestions } from "@/data/tribeQuestions";
 import { tribes } from "@/data/tribes";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
+import { TRIBE_THEMES, FALLBACK_THEME } from "@/data/resultThemes";
+import {
+  DynamicCorners,
+  DynamicDivider,
+} from "@/components/DynamicQuiz";
 
-const DIVIDER = (
+// ─── Static divider & corners — golden tone, quiz phase only ─────────────────
+
+const STATIC_DIVIDER = (
   <div className="flex items-center gap-3 my-1">
     <div
       className="h-px flex-1"
@@ -36,142 +43,54 @@ const DIVIDER = (
   </div>
 );
 
-function TribeCorners() {
+function StaticCorners() {
   return (
     <>
-      {/* Top-left */}
-      <svg
-        className="absolute left-0 top-0 z-20 h-16 w-16 opacity-60"
-        viewBox="0 0 64 64"
-        fill="none"
-      >
-        <path
-          d="M2 32 L2 2 L32 2"
-          stroke="rgba(160,130,50,0.8)"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M2 16 L2 2 L16 2"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.5"
-        />
-        <circle cx="2" cy="2" r="2" fill="rgba(160,130,50,0.9)" />
-        <path
-          d="M8 2 L8 8"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.4"
-        />
-        <path
-          d="M2 8 L8 8"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.4"
-        />
-      </svg>
-      {/* Top-right */}
-      <svg
-        className="absolute right-0 top-0 z-20 h-16 w-16 rotate-90 opacity-60"
-        viewBox="0 0 64 64"
-        fill="none"
-      >
-        <path
-          d="M2 32 L2 2 L32 2"
-          stroke="rgba(160,130,50,0.8)"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M2 16 L2 2 L16 2"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.5"
-        />
-        <circle cx="2" cy="2" r="2" fill="rgba(160,130,50,0.9)" />
-        <path
-          d="M8 2 L8 8"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.4"
-        />
-        <path
-          d="M2 8 L8 8"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.4"
-        />
-      </svg>
-      {/* Bottom-left */}
-      <svg
-        className="absolute bottom-0 left-0 z-20 h-16 w-16 -rotate-90 opacity-60"
-        viewBox="0 0 64 64"
-        fill="none"
-      >
-        <path
-          d="M2 32 L2 2 L32 2"
-          stroke="rgba(160,130,50,0.8)"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M2 16 L2 2 L16 2"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.5"
-        />
-        <circle cx="2" cy="2" r="2" fill="rgba(160,130,50,0.9)" />
-        <path
-          d="M8 2 L8 8"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.4"
-        />
-        <path
-          d="M2 8 L8 8"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.4"
-        />
-      </svg>
-      {/* Bottom-right */}
-      <svg
-        className="absolute bottom-0 right-0 z-20 h-16 w-16 rotate-180 opacity-60"
-        viewBox="0 0 64 64"
-        fill="none"
-      >
-        <path
-          d="M2 32 L2 2 L32 2"
-          stroke="rgba(160,130,50,0.8)"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M2 16 L2 2 L16 2"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.5"
-        />
-        <circle cx="2" cy="2" r="2" fill="rgba(160,130,50,0.9)" />
-        <path
-          d="M8 2 L8 8"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.4"
-        />
-        <path
-          d="M2 8 L8 8"
-          stroke="rgba(160,130,50,0.4)"
-          strokeWidth="0.5"
-          opacity="0.4"
-        />
-      </svg>
+      {[
+        "absolute left-0  top-0    z-20 h-16 w-16 opacity-60",
+        "absolute right-0 top-0    z-20 h-16 w-16 rotate-90  opacity-60",
+        "absolute left-0  bottom-0 z-20 h-16 w-16 -rotate-90 opacity-60",
+        "absolute right-0 bottom-0 z-20 h-16 w-16 rotate-180 opacity-60",
+      ].map((cls, i) => (
+        <svg key={i} className={cls} viewBox="0 0 64 64" fill="none">
+          <path
+            d="M2 32 L2 2 L32 2"
+            stroke="rgba(160,130,50,0.8)"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M2 16 L2 2 L16 2"
+            stroke="rgba(160,130,50,0.4)"
+            strokeWidth="0.5"
+            opacity="0.5"
+          />
+          <circle cx="2" cy="2" r="2" fill="rgba(160,130,50,0.9)" />
+          <path
+            d="M8 2 L8 8"
+            stroke="rgba(160,130,50,0.4)"
+            strokeWidth="0.5"
+            opacity="0.4"
+          />
+          <path
+            d="M2 8 L8 8"
+            stroke="rgba(160,130,50,0.4)"
+            strokeWidth="0.5"
+            opacity="0.4"
+          />
+        </svg>
+      ))}
     </>
   );
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function TribeQuizPage() {
   const t = useTranslations("TribeQuiz");
   const locale = useLocale();
   const tribesT = useTranslations("Tribes");
   const questionsT = useTranslations("TribeQuestions");
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [scores, setScores] = useState<Record<string, number>>({});
   const [finished, setFinished] = useState(false);
@@ -182,25 +101,21 @@ export default function TribeQuizPage() {
   const question = tribeQuestions[currentQuestion];
 
   function handleAnswer(points: Record<string, number>) {
-    const updatedScores = { ...scores };
-    for (const tribe in points) {
-      updatedScores[tribe] = (updatedScores[tribe] || 0) + points[tribe];
-    }
+    const updated = { ...scores };
+    for (const tribe in points)
+      updated[tribe] = (updated[tribe] || 0) + points[tribe];
     setHistory([...history, { scores: { ...scores }, answer: points }]);
-    setScores(updatedScores);
-    const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < tribeQuestions.length) {
-      setCurrentQuestion(nextQuestion);
-    } else {
-      setFinished(true);
-    }
+    setScores(updated);
+    const next = currentQuestion + 1;
+    if (next < tribeQuestions.length) setCurrentQuestion(next);
+    else setFinished(true);
   }
 
   function handleBack() {
     if (currentQuestion === 0) return;
-    const previousState = history[history.length - 1];
-    if (!previousState) return;
-    setScores(previousState.scores);
+    const prev = history[history.length - 1];
+    if (!prev) return;
+    setScores(prev.scores);
     setHistory(history.slice(0, -1));
     setCurrentQuestion(currentQuestion - 1);
   }
@@ -209,17 +124,23 @@ export default function TribeQuizPage() {
     return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0];
   }
 
-  const winningTribe = tribes.find((tribe) => tribe.id === getWinningTribe());
+  const winnerId = getWinningTribe();
+  const winningTribe = tribes.find((t) => t.id === winnerId);
+
+  // ── Derive theme from result ──────────────────────────────────────────────
+  const theme = winnerId
+    ? (TRIBE_THEMES[winnerId] ?? FALLBACK_THEME)
+    : FALLBACK_THEME;
 
   return (
     <main className="scanline-overlay relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-10">
-      {/* Background */}
+      {/* ── Background ───────────────────────────────────────────────────── */}
       <div
         className="animate-slow-zoom absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/backgrounds/tribes-bg.png')" }}
       />
 
-      {/* Overlays */}
+      {/* Base overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -227,35 +148,43 @@ export default function TribeQuizPage() {
             "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(5,4,2,0.4) 50%, rgba(0,0,0,0.6) 100%)",
         }}
       />
-      <div
+
+      {/* Tinted radial — animates to tribe color on reveal */}
+      <motion.div
         className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 0%, rgba(120,90,20,0.1) 0%, transparent 60%)",
+        animate={{
+          background: finished
+            ? `radial-gradient(ellipse at 50% 0%, ${theme.accentDim.replace("0.4", "0.14")} 0%, transparent 60%)`
+            : "radial-gradient(ellipse at 50% 0%, rgba(120,90,20,0.1) 0%, transparent 60%)",
         }}
+        transition={{ duration: 1.4 }}
       />
 
-      {/* Ambient orbs */}
-      <div
+      {/* Ambient orb A */}
+      <motion.div
         className="animate-pulse-glow pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(140,110,30,0.35) 0%, rgba(100,80,20,0.08) 50%, transparent 70%)",
-          filter: "blur(8px)",
+        animate={{
+          background: finished
+            ? theme.orbA
+            : "radial-gradient(circle, rgba(140,110,30,0.35) 0%, rgba(100,80,20,0.08) 50%, transparent 70%)",
         }}
-      />
-      <div
-        className="animate-pulse-glow pointer-events-none absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(120,95,25,0.28) 0%, rgba(90,70,15,0.06) 50%, transparent 70%)",
-          filter: "blur(12px)",
-          animationDelay: "2s",
-        }}
+        transition={{ duration: 1.4 }}
+        style={{ filter: "blur(8px)" }}
       />
 
-      {/* Back button */}
-      
+      {/* Ambient orb B */}
+      <motion.div
+        className="animate-pulse-glow pointer-events-none absolute -bottom-40 -right-40 h-[600px] w-[600px] rounded-full"
+        animate={{
+          background: finished
+            ? theme.orbB
+            : "radial-gradient(circle, rgba(120,95,25,0.28) 0%, rgba(90,70,15,0.06) 50%, transparent 70%)",
+        }}
+        transition={{ duration: 1.4, delay: 0.3 }}
+        style={{ filter: "blur(12px)", animationDelay: "2s" }}
+      />
+
+      {/* ── Back-to-home button ───────────────────────────────────────────── */}
       <Link
         href={`/${locale}`}
         className="absolute left-6 top-6 z-20 border px-5 py-3 text-sm font-semibold backdrop-blur-md transition-all duration-300"
@@ -264,7 +193,7 @@ export default function TribeQuizPage() {
           fontSize: "13px",
           letterSpacing: "0.15em",
           borderColor: "rgba(160,130,50,0.6)",
-          background: "rgba(10,8,2, 1)",
+          background: "rgba(10,8,2,1)",
           color: "rgba(210,180,90,1)",
         }}
         onMouseEnter={(e) => {
@@ -283,23 +212,28 @@ export default function TribeQuizPage() {
         ← {t("backHome")}
       </Link>
 
-      {/* Card */}
+      {/* ── Main card ────────────────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          borderColor: finished
+            ? theme.accentDim.replace("0.4", "0.5")
+            : "rgba(140,110,40,0.28)",
+          background: finished ? theme.cardBg : "rgba(8,6,2,0.7)",
+        }}
         transition={{ duration: 0.8 }}
         className="relative z-10 w-full max-w-3xl border p-10"
-        style={{
-          borderColor: "rgba(140,110,40,0.28)",
-          background: "rgba(8,6,2,0.7)",
-          backdropFilter: "blur(12px)",
-        }}
+        style={{ backdropFilter: "blur(12px)" }}
       >
-        <TribeCorners />
+        {/* Corners */}
+        {finished ? <DynamicCorners theme={theme} /> : <StaticCorners />}
 
+        {/* ── QUIZ PHASE ───────────────────────────────────────────────── */}
         {!finished ? (
           <>
-            {/* Progress header */}
+            {/* Progress */}
             <div className="mb-8">
               <div className="mb-3 flex justify-between items-center">
                 <span
@@ -323,8 +257,6 @@ export default function TribeQuizPage() {
                   {tribeQuestions.length}
                 </span>
               </div>
-
-              {/* Progress bar */}
               <div
                 className="h-1 w-full overflow-hidden"
                 style={{ background: "rgba(140,110,40,0.3)" }}
@@ -340,7 +272,7 @@ export default function TribeQuizPage() {
               </div>
             </div>
 
-            {DIVIDER}
+            {STATIC_DIVIDER}
 
             {/* Question */}
             <h1
@@ -396,9 +328,9 @@ export default function TribeQuizPage() {
               ))}
             </div>
 
-            {DIVIDER}
+            {STATIC_DIVIDER}
 
-            {/* Back button */}
+            {/* Back */}
             <div className="mt-6">
               <button
                 onClick={handleBack}
@@ -427,119 +359,149 @@ export default function TribeQuizPage() {
             </div>
           </>
         ) : (
-          /* Result screen */
+          /* ── RESULT PHASE ──────────────────────────────────────────────── */
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
             className="text-center"
           >
-            {/* Top line */}
+            {/* "Your tribe" label */}
             <div className="flex items-center gap-4 mb-8">
-              <div
+              <motion.div
                 className="h-px flex-1"
-                style={{
+                initial={{
                   background:
                     "linear-gradient(to right, transparent, rgba(140,110,40,0.6))",
                 }}
+                animate={{
+                  background: `linear-gradient(to right, transparent, ${theme.accentMid})`,
+                }}
+                transition={{ duration: 1.2 }}
               />
-              <span
+              <motion.span
+                initial={{ color: "rgba(210,180,90,1)" }}
+                animate={{ color: theme.accent }}
+                transition={{ duration: 1.2 }}
                 style={{
                   fontFamily: "var(--font-cinzel)",
                   fontSize: "16px",
                   letterSpacing: "0.4em",
-                  color: "rgba(210,180,90,1)",
                 }}
               >
                 {t("yourTribe")}
-              </span>
-              <div
+              </motion.span>
+              <motion.div
                 className="h-px flex-1"
-                style={{
+                initial={{
                   background:
                     "linear-gradient(to left, transparent, rgba(140,110,40,0.6))",
                 }}
+                animate={{
+                  background: `linear-gradient(to left, transparent, ${theme.accentMid})`,
+                }}
+                transition={{ duration: 1.2 }}
               />
             </div>
 
-            {/* Tribe name */}
-            <h1
+            {/* ── Tribe name — full theme gradient ──────────────────────── */}
+            <motion.h1
               className="mb-6"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15 }}
               style={{
                 fontFamily: "var(--font-cinzel-deco)",
                 fontSize: "clamp(40px, 8vw, 72px)",
                 fontWeight: "900",
                 letterSpacing: "0.2em",
                 color: "transparent",
-                background:
-                  "linear-gradient(180deg, #e8ddb0 0%, #c8a840 30%, #a07820 60%, #c8a840 100%)",
+                background: `linear-gradient(180deg, ${theme.gradientTop} 0%, ${theme.gradientMid} 35%, ${theme.gradientBot} 65%, ${theme.gradientMid} 100%)`,
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
-                filter: "drop-shadow(0 0 20px rgba(140,110,30,0.5))",
+                filter: `drop-shadow(0 0 24px ${theme.glowColor})`,
               }}
             >
               {winningTribe?.name}
-            </h1>
+            </motion.h1>
 
-            {DIVIDER}
+            <DynamicDivider theme={theme} />
 
-            <img
+            {/* Image */}
+            <motion.img
               src={winningTribe?.image}
               alt={winningTribe?.name}
               className="mx-auto my-8 max-h-[420px] w-auto object-contain"
-              style={{ filter: "drop-shadow(0 0 30px rgba(140,110,30,0.3))" }}
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.3 }}
+              style={{ filter: `drop-shadow(0 0 32px ${theme.imageShadow})` }}
             />
 
-            {DIVIDER}
+            <DynamicDivider theme={theme} />
 
-            <p
+            {/* Description */}
+            <motion.p
               className="mx-auto max-w-2xl mt-6 leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
               style={{
                 fontFamily: "var(--font-cinzel)",
                 fontSize: "16px",
-                color: "rgba(200,175,110,1)",
+                color: theme.bodyText,
                 letterSpacing: "0.03em",
                 lineHeight: "1.9",
               }}
             >
               {winningTribe && tribesT(winningTribe.description)}
-            </p>
+            </motion.p>
 
-            {/* Restart */}
-            <button
+            {/* ── Restart button — fully themed ───────────────────────────── */}
+            <motion.button
               onClick={() => window.location.reload()}
               className="mt-10 border px-8 py-4 transition-all duration-300"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.65 }}
               style={{
                 fontFamily: "var(--font-cinzel)",
                 fontSize: "16px",
                 letterSpacing: "0.2em",
-                borderColor: "rgba(160,130,50,0.5)",
-                background: "rgba(140,110,40,0.08)",
-                color: "rgba(210,180,90,1)",
+                borderColor: theme.accentDim.replace("0.4", "0.55"),
+                background: theme.accentDim.replace("0.4", "0.08"),
+                color: theme.accent,
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLButtonElement).style.background =
-                  "rgba(140,110,40,0.2)";
+                  theme.accentDim.replace("0.4", "0.2");
                 (e.currentTarget as HTMLButtonElement).style.borderColor =
-                  "rgba(200,165,60,0.9)";
+                  theme.accent;
+                (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                  `0 0 18px ${theme.glowColor}`;
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLButtonElement).style.background =
-                  "rgba(140,110,40,0.08)";
+                  theme.accentDim.replace("0.4", "0.08");
                 (e.currentTarget as HTMLButtonElement).style.borderColor =
-                  "rgba(160,130,50,0.5)";
+                  theme.accentDim.replace("0.4", "0.55");
+                (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
               }}
             >
               ↺ {t("restartQuiz")}
-            </button>
+            </motion.button>
 
-            {/* Bottom line */}
-            <div className="flex items-center gap-4 mt-10">
+            {/* Bottom separator */}
+            <motion.div
+              className="flex items-center gap-4 mt-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
               <div
                 className="h-px flex-1"
                 style={{
-                  background:
-                    "linear-gradient(to right, transparent, rgba(140,110,40,0.3))",
+                  background: `linear-gradient(to right, transparent, ${theme.accentDim.replace("0.4", "0.3")})`,
                 }}
               />
               <span
@@ -547,7 +509,7 @@ export default function TribeQuizPage() {
                   fontFamily: "var(--font-cinzel)",
                   fontSize: "13px",
                   letterSpacing: "0.5em",
-                  color: "rgba(160,130,50,0.7)",
+                  color: theme.accentMid,
                 }}
               >
                 {t("classificated")}
@@ -555,11 +517,10 @@ export default function TribeQuizPage() {
               <div
                 className="h-px flex-1"
                 style={{
-                  background:
-                    "linear-gradient(to left, transparent, rgba(140,110,40,0.3))",
+                  background: `linear-gradient(to left, transparent, ${theme.accentDim.replace("0.4", "0.3")})`,
                 }}
               />
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </motion.div>
